@@ -1,0 +1,44 @@
+int* productExceptSelf(int* nums, int numsSize, int* returnSize) {
+    int totalProduct = 1;
+    int zeroCount = 0;
+    int n = numsSize;
+
+    // Calculate the total product of all non-zero elements
+    for (int i = 0; i < n; i++) {
+        if (nums[i] != 0) {
+            totalProduct *= nums[i];
+        } else {
+            zeroCount++;
+        }
+    }
+
+    // Allocate memory for the result array
+    int* result = (int*)malloc(n * sizeof(int));
+    if (result == NULL) {
+        *returnSize = 0;
+        return NULL; // Memory allocation failed
+    }
+
+    // Calculate each element of the result array
+    for (int i = 0; i < n; i++) {
+        if (nums[i] != 0) {
+            if (zeroCount == 0) {
+                result[i] = totalProduct / nums[i];
+            } else {
+                result[i] = 0; // Product will be zero if there are any zeros
+            }
+        } else {
+            // If there's more than one zero, the result for this index will be zero
+            if (zeroCount > 1) {
+                result[i] = 0;
+            } else {
+                result[i] = totalProduct;
+            }
+        }
+    }
+
+    // Set the returnSize pointer to the size of the result array
+    *returnSize = n;
+
+    return result;
+}
