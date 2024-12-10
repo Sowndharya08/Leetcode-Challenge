@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int hIndex(vector<int>& arr) {
+        
+       int n=arr.size();
+       int ans=0;
+       sort(arr.begin(),arr.end());
+    
+       for(int i=0;i<n;i++){
+                if(arr[i]>=n-i){ //keep track of maximum of citation ..index
+                        return n-i;
+                }               
+ 
+
+       }
+
+return 0;
+
+    }
