@@ -1,0 +1,17 @@
+//straight forward approach--->o(m*n)
+
+char* longestCommonPrefix(char** strs, int strsSize) {
+    char* prefix = strs[0]; // Initialize prefix as the first string
+    
+    for (int i = 1; i < strsSize; i++) { // Loop through the remaining strings
+        int j = 0;
+        while (prefix[j] != '\0' && strs[i][j] != '\0' && prefix[j] == strs[i][j]) {
+            j++; // Move to the next character as long as both strings have the same character
+        }
+        prefix[j] = '\0'; // Terminate the prefix at the first character that differs
+        
+        if (prefix[0] == '\0') return ""; // If prefix becomes empty, no common prefix exists
+    }
+    
+    return prefix;
+}
