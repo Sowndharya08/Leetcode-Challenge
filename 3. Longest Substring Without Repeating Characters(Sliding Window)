@@ -1,0 +1,23 @@
+2 approaches
+//1.using HashSet in java
+//in c using HashTable
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left=0,max_length=0;
+        HashSet<Character> charset=new HashSet<>();
+        int right=0;
+        for(right=0;right<s.length();right++){
+            while(charset.contains(s.charAt(right))){
+             charset.remove(s.charAt(left));
+             left++;
+
+            }
+          charset.add(s.charAt(right));
+          max_length=Math.max(max_length,right-left+1);
+
+        }
+        return max_length;
+
+    }
+}
