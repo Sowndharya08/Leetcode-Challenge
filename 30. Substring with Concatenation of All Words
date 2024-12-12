@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        vector<int> ans;
+        int len = s.size();
+        int n = words.size();
+        int wordSize = words[0].size();
+        int windowSize = wordSize * n;
+
+        if (len < windowSize) return ans; // Early exit if string is too short
+        
+        unordered_map<string, int> freq;
+        for (const string &word : words) {
+            freq[word]++;
+        }
+
+        // Check every possible starting point within the first word size
+        for (int startPos = 0; startPos < wordSize; startPos++) {
+            int start = startPos;
+            unordered_map<string, int> curr;
+
+            int count = 0;  // To count how many valid words we have seen
+
+            for (int i = start; i + wordSize <= len;) {
+                string word = s.substr(i, wordSize);
+                i += wordSize;
+// If the word is not in the list of words, reset the window
+                if (freq.find(word) == freq.end()) {
+                    curr.clear();
+                    count = 0;
+                    start = i;
+                } else {
+                    curr[word]++;
+                    count++;
+// If a word appears more times than expected, shift the window
+                    while (curr[word] > freq[word]) {
+                        string leftWord = s.substr(start, wordSize);
+                        curr[leftWord]--;
+                        count--;
+                        start += wordSize;
+                    }
+                    if (count == n) {
+                        ans.push_back(start);
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+};
