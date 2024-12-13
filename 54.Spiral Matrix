@@ -1,0 +1,41 @@
+int* spiralOrder(int** mat, int n, int* m, int* returnSize) {
+    int rowbegin=0,colbegin=0;
+    int rowend=n-1,colend=m[0]-1;
+    int size=0;
+    for(int i=0;i<n;i++){
+        size+=m[i];
+    }
+  *returnSize=size;
+  int *result=(int *)malloc(size*sizeof(int));
+  int index=0,i=0;
+
+    while(colbegin<=colend && rowbegin<=rowend){
+
+              for(i=colbegin;i<=colend ;i++){
+                result[index++]=mat[rowbegin][i];
+              }
+              rowbegin++;
+          for(i=rowbegin;i<=rowend ;i++){
+                 result[index++]=mat[i][colend];
+              }
+              colend--;
+
+     if (rowbegin <= rowend) {
+        for(i=colend;i>=colbegin;i--){
+                 result[index++]=mat[rowend][i];
+              }
+              rowend--;
+     }
+ if (colbegin <= colend) {
+            for(i=rowend;i>=rowbegin;i--){
+                result[index++]=mat[i][colbegin];
+            }
+            colbegin++;
+ }
+
+
+    }
+
+return result;
+
+}
