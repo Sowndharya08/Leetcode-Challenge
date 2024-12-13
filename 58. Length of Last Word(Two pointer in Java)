@@ -1,0 +1,32 @@
+2 approaches---->O(n)
+//1. splitting the string into string array adn returning the length of the string at last index..
+//2. using Two pointers to find the length(best in space and time)---BEST!!!!
+
+2 pointer code:------------------------------------100%-------------->
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+       int end=s.length()-1;
+       while(end>=0 && s.charAt(end)== ' '){
+        end--;
+       }
+       int start=end;
+       while(start>=0 && s.charAt(start)!= ' '){
+        start--;
+       }
+       return end-start;
+    }
+}
+using split function--------------------------------------------------->
+
+
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        String[] words = s.split("\\s+");
+         int len=words.length;
+        return words[len-1].length();
+
+
+    }
+}
