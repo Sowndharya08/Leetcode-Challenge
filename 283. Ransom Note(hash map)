@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool canConstruct(string s, string t) {
+         unordered_map<char,int> hash;
+         for(char c: t){
+            hash[c]++;
+         }
+
+         for(char c:s){
+            if(hash[c]<=0){
+                return false;
+            }
+            hash[c]--;
+         }
+return true;
+    }
+};
