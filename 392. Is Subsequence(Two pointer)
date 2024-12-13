@@ -1,4 +1,6 @@
 //2 approach (2 pointer)
+//using int indexOf(int ch, int fromIndex) function in java
+c++------------------------------------------------------------>less memory and  o(n)
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
@@ -17,3 +19,19 @@ public:
         return false;
     }
 };
+
+java------------------------------------------------------> more memory comparitively ,can also have worst case scenario of--O(m*n)
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int index=-1;
+        for(char ch:s.toCharArray()){
+                index=t.indexOf(ch,index+1);
+                if(index==-1)
+                return false;
+
+        }
+
+return true;
+    }
+    
+}
