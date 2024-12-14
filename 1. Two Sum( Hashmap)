@@ -1,1 +1,49 @@
+//c++------------------------------------------------------------>
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> num_map; // To store the number and its index
+        
+        // Iterate through the vector to find the solution
+        for (int i = 0; i < nums.size(); ++i) {
+            int complement = target - nums[i]; // Calculate the complement
+            
+            // Check if the complement exists in the map
+            if (num_map.find(complement) != num_map.end()) {
+                // If found, return the indices of the complement and the current number
+                return {num_map[complement], i};
+            }
+            
+            // Otherwise, store the current number and its index in the map
+            num_map[nums[i]] = i;
+        }
+        
+        return {}; // Return an empty vector if no solution found (though the problem guarantees one solution)
+    }
+};
+
+//c language brute force----------------------------------------------------------------------->
+
+int* twoSum(int* nums, int numsSize, int target, int* returnSize){
+    int *retarr=malloc(2*sizeof(int));
+    retarr[0]=1;
+    retarr[1]=1;
+    for(int i=0;i<numsSize;i++)
+    {
+        for(int j=i+1;j<numsSize;j++)
+        {
+            if(nums[i]+nums[j]==target)
+            {
+                *returnSize=2;
+                retarr[0]=i;
+                retarr[1]=j;
+                return(retarr);
+            }
+        }
+    }
+    *returnSize=0;
+    return NULL;
+
+
+}
 
