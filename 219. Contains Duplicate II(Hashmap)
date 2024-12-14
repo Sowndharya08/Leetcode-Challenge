@@ -1,0 +1,39 @@
+//C++------------------------------------------------------>
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& vec, int k) {
+          unordered_map<int,int> index_map;
+          int n=vec.size();
+          for(int i=0;i<n;i++){
+        if(index_map.find(vec[i]) != index_map.end()  && abs(i-index_map[vec[i]])<=k ){
+            return true;
+           }
+         index_map[vec[i]]=i;
+          } return false;
+    }
+   
+};
+Java--------------------------------------------------------->
+import java.util.HashMap;
+
+public class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        // Create a HashMap to store the number and its most recent index
+        HashMap<Integer, Integer> indexMap = new HashMap<>();
+
+        // Iterate over the array
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+
+            // Check if the number already exists in the map and if the distance condition is met
+            if (indexMap.containsKey(num) && Math.abs(i - indexMap.get(num)) <= k) {
+                return true;  // Found the duplicate within the range
+            }
+
+            // Update the map with the current index of the number
+            indexMap.put(num, i);
+        }
+
+        // If no such pair is found, return false
+        return false;
+    }
