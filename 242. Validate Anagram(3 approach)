@@ -1,0 +1,59 @@
+1.using hash_map----------------------------------------------------------------->TC:O(n) SC: O(K)
+ class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char,int> mp;
+        if(s.length()!=t.length())
+                  return false;
+        for(char c:s){
+            mp[c]++;
+        }
+
+        for(char c:t){
+            mp[c]--;
+            if(mp[c]<0){
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+2.sort and equate----------------------------------------------------------------->O(n Log(n))
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char,int> mp;
+        if(s.length()!=t.length())
+                  return false;
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        return s==t;
+    }
+};
+
+
+
+3.using frequency array--------------------------------------------------------> O(n) SC: O(1)
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+      
+        if (s.length() != t.length()) {
+            return false;
+        }
+        int charCount[26] = {0};  // Array of size 26 to count each letter's frequency
+
+        // Count frequency of characters in string s
+        for (char c : s) {
+            charCount[c - 'a']++; 
+        }
+
+        for (char c : t) {
+            charCount[c - 'a']--;  
+            if (charCount[c - 'a'] < 0) {
+                return false; 
+            }
+        }
+ return true;  }
+};
