@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) { s={"eat","ate","tan","ant"}
+        unordered_map<string,vector<string> >mp;
+for(string s:strs){
+          string word=s;
+          sort(word.begin(),word.end());
+          mp[word].push_back(s);    // {aet:{"eat","ate"}} 
+}
+vector<vector<string>> ans;
+for(auto s: mp){
+    
+ans.push_back(s.second);
+
+}
+
+return ans;
+
+
+    }
+};
+
