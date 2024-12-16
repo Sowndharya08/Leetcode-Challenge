@@ -1,0 +1,29 @@
+//c++---------------------------------------------------------------------------------->
+class Solution {
+public:
+    bool isHappy(int n) {
+        unordered_map<int> seen;
+        while(n!=1){
+             n=getsumof(n);
+             if(seen.count(n)){
+                return false;
+             }
+              seen.insert(n);
+        }
+return true;
+    }
+
+
+
+private:
+     int getsumof(int n){
+          int sum=0,d;
+          while(n>0){
+            d=n%10;
+            sum+=d*d;
+            n/=10;
+          }
+          return sum;
+
+     }
+     };
