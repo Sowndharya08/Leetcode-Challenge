@@ -1,3 +1,5 @@
+//2 Approaches
+
 class Solution {
 public:
     int candy(vector<int>& ratings) {
@@ -21,3 +23,43 @@ for(int c:candies){
  return tot;
     }
 };
+
+---------------------------------------------------------------------------->O(n)
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int n=ratings.size();
+        int tot_candies=n,i=1;
+        while(i<n){
+            if(ratings[i]==ratings[i-1]){
+                i++;
+                continue;
+            }
+            int curr_peak=0;
+            while(i<n && ratings[i]>ratings[i-1]){
+                         curr_peak++;
+                         tot_candies+=curr_peak;
+                         i++;
+            }
+            if(i==n){
+               return tot_candies;
+            }
+            int curr_valley=0;
+
+            while(i<n && ratings[i]<ratings[i-1]){
+                curr_valley++;
+                tot_candies+=curr_valley;
+                i++;
+
+            }
+
+tot_candies-=min(curr_peak,curr_valley);
+
+        }
+         
+return tot_candies;
+
+    }
+};
+
+
