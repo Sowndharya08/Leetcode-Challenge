@@ -1,0 +1,29 @@
+2 appraches..
+1.using queue---------------------------------------------------------->O(N*K)
+
+class Solution {
+public:
+    int findTheWinner(int n, int k) {
+        queue<int> q;
+for(int i=1;i<=n;i++){
+    q.push(i);
+}
+while(q.size()>1){
+for(int i=1;i<k;i++){
+        int friend_out=q.front();
+        q.pop();
+        q.push(friend_out);
+}
+q.pop();//removing kth element from queue
+}
+return q.front();
+    }
+};
+2.using formulae------------------------------------------------------->
+int findTheWinner(int n, int k) {
+    int winner = 0; // Base case: when there's only one person, they're the winner (0-based indexing)
+    for (int i = 1; i <= n; ++i) {
+        winner = (winner + k) % i;
+    }
+    return winner + 1; // Convert 0-based index to 1-based index
+}
