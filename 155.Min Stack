@@ -1,0 +1,35 @@
+class MinStack {
+public:
+     
+    MinStack() {
+        
+    }
+    
+    void push(int val) {
+     st.push(val);
+     if(minstack.empty() || minstack.top()>val){
+            minstack.push(val);
+     } 
+     else
+     minstack.push(minstack.top()); 
+    }
+    
+    void pop() {
+       st.pop();
+       minstack.pop();
+    }
+    
+    int top() {
+      return st.top();
+    }
+    
+    int getMin() {
+        
+        return minstack.top();
+    }
+    private:
+    std::stack<int> st;    
+    std::stack<int> minstack; 
+
+};
+
