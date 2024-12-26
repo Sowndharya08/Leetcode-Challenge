@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        return isMirror(root->left,root->right);
+
+    }
+private:
+    bool isMirror(TreeNode* p,TreeNode* q){
+        if(!p && !q){
+            return true;
+        }
+        else if(!p || !q || p->val!=q->val){
+            return false;
+        }
+        else
+        return isMirror(p->left,q->left) && isMirror(p->right,q->right);
+    }
+};
