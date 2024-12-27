@@ -1,0 +1,26 @@
+2 aproaches..................................................................................best is First one IN C++
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(!root){
+            return 0;
+        }
+        int a=countNodes(root->left);
+        int b=countNodes(root->right);
+        return a+b+1;
+    }
+};
+
+
+next only beats 2%------------------------------------------------------------------------>WHY???? IN C,SAME CODE RUNS FOR 30MS...?
+int countNodes(struct TreeNode* root) {
+if(root==NULL)
+return 0;
+
+    int l= countNodes(root->left);
+ 
+    int r= countNodes(root->right);
+    
+
+return (1+l+r);
+}
