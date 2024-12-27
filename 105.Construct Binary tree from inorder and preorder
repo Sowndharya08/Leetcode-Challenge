@@ -1,0 +1,75 @@
+2 approaches..
+using Unordered Map------------------------------------------------------------------------------------------>
+class Solution {
+public:
+    unordered_map<int,int>m;
+    int k=0;
+    TreeNode* MyTree(vector<int>&preorder,vector<int>&inorder,int i,int j)
+    {
+        if(i<=j)
+        {
+            TreeNode* T=new TreeNode(preorder[k]);
+            int x=m[preorder[k]];
+            k++;
+            T->left=MyTree(preorder,inorder,i,x-1);
+            T->right=MyTree(preorder,inorder,x+1,j);
+            return T;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
+    {
+        for(int i=0;i<inorder.size();i++)
+        {
+            m[inorder[i]]=i;
+        }
+        return MyTree(preorder,inorder,0,inorder.size()-1);
+    }
+};
+
+
+
+
+
+
+using dequeue---------------------------------------------------------------------------------------->o(n^2)---
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+
+    deque<int>pre_deque(preorder.begin(),preorder.end());
+    return build(pre_deque,inorder);
+
+ 
+    }
+private:
+    TreeNode * build(deque<int>& preorder,vector<int>& inorder){
+        if(!inorder.empty()){
+             int val=preorder.front();
+             preorder.pop_front();
+             auto it=find(inorder.begin(),inorder.end(),val);
+             int idx= it-inorder.begin();
+
+            TreeNode*root= new TreeNode(val);
+            vector<int> left(inorder.begin(),inorder.begin()+idx);
+            vector<int>right(inorder.begin()+idx+1,inorder.end());
+              
+              root->left=build(preorder,left);
+              root->right=build(preorder,right);
+
+return root;
+
+
+        }
+        return nullptr;
+    }
+
+};
+
+
+
+
+
