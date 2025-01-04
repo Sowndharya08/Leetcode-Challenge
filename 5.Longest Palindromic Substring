@@ -1,0 +1,73 @@
+TC:O(N^2)------------------------------------------------------------------------>DP
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        if (n == 0) return "";
+        
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
+        string longest = "";
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = true;
+            longest = s.substr(i, 1);
+        }
+
+        for (int length = 2; length <= n; length++) { 
+            for (int i = 0; i <= n - length; i++) {
+                int j = i + length - 1;
+                if (s[i] == s[j]) {
+                   
+                    if (length == 2 || dp[i + 1][j - 1]) {
+                        dp[i][j] = true;
+                        if (length > longest.size()) {
+                            longest = s.substr(i, length);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return longest;
+    }
+};
+----------------------------------------------------------------------------------------------->TWO POINTER
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if (s.empty()) return "";
+        
+        string longest = "";
+        
+        // Helper function to expand around the center
+        auto expandAroundCenter = [&](int left, int right) {
+            while (left >= 0 && right < s.size() && s[left] == s[right]) {
+                left--;
+                right++;
+            }
+            return s.substr(left + 1, right - left - 1);
+        };
+        
+        for (int i = 0; i < s.size(); i++) {
+            // Odd-length palindrome (centered at i)
+            string palindrome1 = expandAroundCenter(i, i);
+            // Even-length palindrome (centered between i and i+1)
+            string palindrome2 = expandAroundCenter(i, i + 1);
+            
+            // Update longest palindrome
+            if (palindrome1.size() > longest.size()) {
+                longest = palindrome1;
+            }
+            if (palindrome2.size() > longest.size()) {
+                longest = palindrome2;
+            }
+        }
+        
+        return longest;
+    }
+};
+
