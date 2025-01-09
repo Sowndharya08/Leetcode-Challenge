@@ -1,0 +1,40 @@
+class Solution {
+public:
+    std::string longestPalindrome(std::string s) {
+        if (s.length() <= 1) {
+            return s;
+        }
+        
+        int max_len = 1;  // Initialize to 1, as the smallest palindrome is a single character
+        int start = 0;
+        int end = 0;
+        
+        // DP table to keep track of palindromes
+        std::vector<std::vector<bool>> dp(s.length(), std::vector<bool>(s.length(), false));
+        
+        // Every single character is a palindrome
+        for (int i = 0; i < s.length(); ++i) {
+            dp[i][i] = true;
+        }
+        
+        // Check for palindromes of length 2 and greater
+        for (int len = 2; len <= s.length(); ++len) {  // len is the length of the substring
+            for (int i = 0; i <= s.length() - len; ++i) {
+                int j = i + len - 1;  // j is the end index of the substring
+                
+                if (s[i] == s[j] && (len == 2 || dp[i+1][j-1])) {
+                    dp[i][j] = true;
+                    
+                    if (len > max_len) {
+                        max_len = len;
+                        start = i;
+                        end = j;
+                    }
+                }
+            }
+        }
+        
+        // Return the longest palindromic substring
+        return s.substr(start, max_len);
+    }
+};
