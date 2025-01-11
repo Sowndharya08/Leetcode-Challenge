@@ -1,0 +1,24 @@
+Time Complexity:
+The time complexity is O(max(a.length(), b.length())) because we iterate through each bit of both input strings once.
+Space Complexity:
+The space complexity is O(max(a.length(), b.length())) because we store the resulting binary sum, which can be at most one bit longer than the longer of the two input strings.
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string res="";
+        int carry = 0;
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+
+        while (i >= 0 || j >= 0 || carry) {
+            if (i >= 0) carry += a[i--] - '0';
+            if (j >= 0) carry += b[j--] - '0';
+
+            res += carry % 2 + '0';
+            carry /= 2;
+        }
+
+        reverse(begin(res), end(res));
+        return res;        
+    }
+};
