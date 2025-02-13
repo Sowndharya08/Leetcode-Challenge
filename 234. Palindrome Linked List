@@ -1,0 +1,66 @@
+USING ARRAY---------------------------------------->LESS TIME COMPARITIVELY//99% BEST SOLUTIONNNNNNNNNNNNNNN
+class Solution {
+    public static int[] arr=new int[100000];
+    public boolean isPalindrome(ListNode head) {
+        if(head==null || head.next==null) return true;
+        ListNode temp=head;int i=0;
+        while(temp!=null)
+        {
+            arr[i]=temp.val;
+            i++;
+            temp=temp.next;
+        }
+        for(int left=0,right=i-1;left<=right;left++,right--)
+        {
+            if(arr[left]!=arr[right])
+            return false;
+        }
+        return true;
+        
+    }
+}
+
+
+
+TWO POINTER------------------------------------------------------------------------>
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> list=new ArrayList<>();
+        while(head!=null){
+            list.add(head.val);
+            head=head.next;
+        }
+int left=0;
+int right=list.size()-1;
+while(left< right && list.get(left)==list.get(right)){
+            left++;
+            right--;      
+          
+
+}
+return left>=right;
+
+    }
+}
+
+
+STACK PROBLEM------------------------------------------------------------------------------
+------------->class Solution {
+    public boolean isPalindrome(ListNode head) {
+    Stack<Integer> st= new Stack<>();
+    ListNode curr= head;
+    while(curr!=null){
+          st.push(curr.val);
+          curr=curr.next;
+
+    }
+    curr=head;
+    while(curr!=null && curr.val == st.pop()){
+         curr=curr.next;
+
+    }
+return curr==null;
+
+
+    }
+}
