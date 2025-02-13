@@ -1,0 +1,33 @@
+class Solution {
+    public String makeSmallestPalindrome(String s) {
+        char [] arr=s.toCharArray();
+        int n=arr.length;
+        int left=0;
+        int right=n-1,op=0;
+        while(left<right){
+
+                 if(arr[left] != arr[right]){
+
+                             if(arr[left]>arr[right]){
+                                arr[left]=arr[right];
+                             }
+                             else
+                             arr[right]=arr[left];
+                op++;
+
+                 }
+        left++;
+        right--;
+
+
+        }
+
+
+if(op==0)
+return s;
+else
+return new String(arr);
+
+
+    }
+}
