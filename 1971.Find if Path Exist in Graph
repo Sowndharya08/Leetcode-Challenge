@@ -1,0 +1,42 @@
+Given souce and destination node..check if thay can be visited...for this perform a small dfs and then check if visited[destination] has become true or not a
+fter one dfs call..becaue one dfs call runs for only one connected component!and not for disconnected ones...so after oine call..
+from the source if the destiny is not within the same connected component ,,then the visited of Destination would be "false"
+
+
+class Solution {
+public:
+void dfs(int nd,vector<vector<int>> &adj,vector<bool> &visited){
+                visited[nd]=true;
+                for(int it:adj[nd]){
+                    if(!visited[it]){
+                            dfs(it,adj,visited);
+
+
+                    }
+                }
+
+
+
+
+}
+
+
+bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+vector<vector<int>> adj(n+1);
+  for(const auto &edge:edges)
+{       int u=edge[0];
+int v=edge[1];
+adj[u].push_back(v);
+adj[v].push_back(u);
+
+        
+}
+vector<bool> visited(n+1,false);
+
+dfs(source,adj,visited);
+return visited[destination];
+
+
+    }
+
+};
